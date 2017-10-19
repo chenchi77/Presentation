@@ -1,19 +1,6 @@
-import presentation
-#from presentation import Present
+from presentation import Present
 
 def main():
-	#pptx = Present("../../key.json")
-	print("test")
-
-'''
-from django.shortcuts import render
-from .present import Present
-from django.http import HttpResponse
-from django.conf import settings
-
-# Create your views here.
-def download(request):
-	response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.presentationml.presentation')
 	data={
 		'default':{
 			'title':'Product Intradtion',
@@ -24,16 +11,11 @@ def download(request):
 			{'product_name':'product two', 'product_description':"This is Product two", 'product_img':'https://lh3.googleusercontent.com/-REC9hG2lrlY/AAAAAAAAAAI/AAAAAAAANQ4/ZzlrQAV6pyE/photo.jpg'},
 		]
 	}
-	pr = Present(settings.GOOGLE_KEY)
-	buffer = pr.create(template="Temp2", data=data)
-
-	file = buffer.getvalue()
-	buffer.close()
-	response.write(file)
-
-	return response
-'''
+	pptx = Present("../../key.json")
+	buffer = pptx.create("Temp2", data=data)
+	
+	f = open('download.pptx', 'wb')
+	f.write(buffer.getvalue())
 
 if __name__ == '__main__':
-	#sys.path.append(os.path.dirname(sys.path[0]))
 	main()
